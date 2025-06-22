@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LangGPT Prompt Assistant</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-robot"></i>
+                    <h1>LangGPT Prompt Assistant</h1>
+                </div>
+                <p class="subtitle">Generate structured prompts using the LangGPT framework</p>
+            </div>
+        </header>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Tab Navigation -->
+            <div class="tab-navigation">
+                <button class="tab-btn active" data-tab="generator">
+                    <i class="fas fa-magic"></i>
+                    Prompt Generator
+                </button>
+                <button class="tab-btn" data-tab="analyzer">
+                    <i class="fas fa-search"></i>
+                    Prompt Analyzer
+                </button>
+                <button class="tab-btn" data-tab="optimizer">
+                    <i class="fas fa-tools"></i>
+                    Prompt Optimizer
+                </button>
+                <button class="tab-btn" data-tab="templates">
+                    <i class="fas fa-layer-group"></i>
+                    Templates
+                </button>
+            </div>
+
+            <!-- Tab Content -->
+            <div class="tab-content">
+                <!-- Prompt Generator Tab -->
+                <div class="tab-panel active" id="generator">
+                    <div class="form-container">
+                        <h2><i class="fas fa-magic"></i> Generate Custom Prompt</h2>
+                        
+                        <form id="promptForm" class="prompt-form">
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="roleType">Role Type</label>
+                                    <select id="roleType" name="roleType" required>
+                                        <option value="assistant">Assistant</option>
+                                        <option value="expert">Expert</option>
+                                        <option value="tutor">Tutor</option>
+                                        <option value="consultant">Consultant</option>
+                                        <option value="specialist">Specialist</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="domain">Domain</label>
+                                    <select id="domain" name="domain" required>
+                                        <option value="programming">Programming</option>
+                                        <option value="writing">Writing</option>
+                                        <option value="analysis">Data Analysis</option>
+                                        <option value="research">Research</option>
+                                        <option value="design">Design</option>
+                                        <option value="marketing">Marketing</option>
+                                        <option value="education">Education</option>
+                                        <option value="business">Business</option>
+                                        <option value="science">Science</option>
+                                        <option value="creative">Creative</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="expertiseLevel">Expertise Level</label>
+                                    <select id="expertiseLevel" name="expertiseLevel">
+                                        <option value="beginner">Beginner</option>
+                                        <option value="intermediate">Intermediate</option>
+                                        <option value="advanced">Advanced</option>
+                                        <option value="expert">Expert</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="style">Communication Style</label>
+                                    <select id="style" name="style">
+                                        <option value="professional">Professional</option>
+                                        <option value="friendly">Friendly</option>
+                                        <option value="academic">Academic</option>
+                                        <option value="casual">Casual</option>
+                                        <option value="technical">Technical</option>
+                                        <option value="educational">Educational</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="specificTask">Specific Task</label>
+                                <textarea id="specificTask" name="specificTask" placeholder="Describe the specific task or function this role should perform..." required></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="requirements">Additional Requirements (one per line)</label>
+                                <textarea id="requirements" name="requirements" placeholder="Enter additional requirements, one per line..."></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="constraints">Constraints (one per line)</label>
+                                <textarea id="constraints" name="constraints" placeholder="Enter constraints or limitations, one per line..."></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="additionalSkills">Additional Skills (one per line)</label>
+                                <textarea id="additionalSkills" name="additionalSkills" placeholder="Enter additional skills, one per line..."></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-magic"></i>
+                                    Generate Prompt
+                                </button>
+                                <button type="button" class="btn btn-secondary" id="clearForm">
+                                    <i class="fas fa-eraser"></i>
+                                    Clear Form
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="result-container" id="generatorResult" style="display: none;">
+                        <h3><i class="fas fa-file-alt"></i> Generated Prompt</h3>
+                        <div class="result-content">
+                            <div class="prompt-output" id="promptOutput"></div>
+                            <div class="usage-instructions" id="usageInstructions"></div>
+                            <div class="tips" id="tips"></div>
+                        </div>
+                        <div class="result-actions">
+                            <button class="btn btn-primary" id="copyPrompt">
+                                <i class="fas fa-copy"></i>
+                                Copy Prompt
+                            </button>
+                            <button class="btn btn-secondary" id="downloadPrompt">
+                                <i class="fas fa-download"></i>
+                                Download
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Prompt Analyzer Tab -->
+                <div class="tab-panel" id="analyzer">
+                    <div class="form-container">
+                        <h2><i class="fas fa-search"></i> Analyze Existing Prompt</h2>
+                        
+                        <form id="analyzerForm" class="prompt-form">
+                            <div class="form-group full-width">
+                                <label for="promptToAnalyze">Prompt to Analyze</label>
+                                <textarea id="promptToAnalyze" name="promptToAnalyze" placeholder="Paste your existing prompt here..." required></textarea>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="analysisType">Analysis Type</label>
+                                    <select id="analysisType" name="analysisType" required>
+                                        <option value="structure">Structure</option>
+                                        <option value="effectiveness">Effectiveness</option>
+                                        <option value="improvement">Improvement</option>
+                                        <option value="completeness">Completeness</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="targetAudience">Target Audience</label>
+                                    <input type="text" id="targetAudience" name="targetAudience" placeholder="e.g., beginners, experts, students">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-search"></i>
+                                    Analyze Prompt
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="result-container" id="analyzerResult" style="display: none;">
+                        <h3><i class="fas fa-chart-bar"></i> Analysis Results</h3>
+                        <div class="result-content" id="analysisOutput"></div>
+                    </div>
+                </div>
+
+                <!-- Prompt Optimizer Tab -->
+                <div class="tab-panel" id="optimizer">
+                    <div class="form-container">
+                        <h2><i class="fas fa-tools"></i> Optimize Prompt</h2>
+                        
+                        <form id="optimizerForm" class="prompt-form">
+                            <div class="form-group full-width">
+                                <label for="promptToOptimize">Prompt to Optimize</label>
+                                <textarea id="promptToOptimize" name="promptToOptimize" placeholder="Paste your prompt to optimize..." required></textarea>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="optimizationGoals">Optimization Goals (one per line)</label>
+                                <textarea id="optimizationGoals" name="optimizationGoals" placeholder="clarity&#10;conciseness&#10;structure&#10;effectiveness" required></textarea>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label for="targetLength">Target Length (words)</label>
+                                    <input type="number" id="targetLength" name="targetLength" placeholder="150">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="stylePreference">Style Preference</label>
+                                    <select id="stylePreference" name="stylePreference">
+                                        <option value="">No preference</option>
+                                        <option value="formal">Formal</option>
+                                        <option value="casual">Casual</option>
+                                        <option value="professional">Professional</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label for="optimizationConstraints">Constraints to Maintain (one per line)</label>
+                                <textarea id="optimizationConstraints" name="optimizationConstraints" placeholder="Enter constraints to maintain..."></textarea>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-tools"></i>
+                                    Optimize Prompt
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <div class="result-container" id="optimizerResult" style="display: none;">
+                        <h3><i class="fas fa-rocket"></i> Optimization Results</h3>
+                        <div class="result-content" id="optimizationOutput"></div>
+                    </div>
+                </div>
+
+                <!-- Templates Tab -->
+                <div class="tab-panel" id="templates">
+                    <div class="templates-container">
+                        <h2><i class="fas fa-layer-group"></i> Predefined Templates</h2>
+                        
+                        <div class="template-grid">
+                            <div class="template-card" data-template="programming">
+                                <div class="template-icon">
+                                    <i class="fas fa-code"></i>
+                                </div>
+                                <h3>Programming Assistant</h3>
+                                <p>Expert programming assistant for code development, debugging, and best practices</p>
+                                <button class="btn btn-secondary template-btn">Use Template</button>
+                            </div>
+
+                            <div class="template-card" data-template="writing">
+                                <div class="template-icon">
+                                    <i class="fas fa-pen"></i>
+                                </div>
+                                <h3>Writing Assistant</h3>
+                                <p>Professional writing assistant for content creation, editing, and style improvement</p>
+                                <button class="btn btn-secondary template-btn">Use Template</button>
+                            </div>
+
+                            <div class="template-card" data-template="analysis">
+                                <div class="template-icon">
+                                    <i class="fas fa-chart-line"></i>
+                                </div>
+                                <h3>Data Analyst</h3>
+                                <p>Data analysis expert for data interpretation, visualization, and insights</p>
+                                <button class="btn btn-secondary template-btn">Use Template</button>
+                            </div>
+
+                            <div class="template-card" data-template="research">
+                                <div class="template-icon">
+                                    <i class="fas fa-microscope"></i>
+                                </div>
+                                <h3>Research Assistant</h3>
+                                <p>Research assistant for literature review, methodology, and academic writing</p>
+                                <button class="btn btn-secondary template-btn">Use Template</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Built with ❤️ using the <a href="https://github.com/langgptai/LangGPT" target="_blank">LangGPT Framework</a></p>
+        </footer>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+        <div class="loading-spinner">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Generating your prompt...</p>
+        </div>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
