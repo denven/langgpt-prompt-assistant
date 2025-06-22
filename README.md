@@ -2,6 +2,8 @@
 
 A powerful prompt assistant built on the [LangGPT framework](https://github.com/langgptai/LangGPT) for generating structured, high-quality prompts. This tool helps you create well-organized prompts following the LangGPT methodology for better AI interactions.
 
+![Demo-UI](./spa-screenshot.png)
+
 ## 🌟 Features
 
 - **Structured Prompt Generation**: Create LangGPT-style prompts with clear role definitions, instructions, and constraints
@@ -25,7 +27,7 @@ This project is built using:
 
 1. **Clone the repository**:
    ```bash
-   git clone <repository-url>
+   git clone https://github.com/denven/langgpt-prompt-assistant.git
    cd langgpt-prompt-assistant
    ```
 
