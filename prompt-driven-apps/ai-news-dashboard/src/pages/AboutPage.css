@@ -1,0 +1,19 @@
+.about-page {
+	background-color: var(--secondary-color);
+	padding: 2rem;
+	border-radius: 8px;
+  }
+  
+  .about-page h1 {
+	color: var(--accent-color);
+  }
+  
+  .about-page p, .about-page ul {
+	color: var(--text-dark);
+	max-width: 800px;
+	line-height: 1.6;
+  }
+  
+  .about-page li {
+	margin-bottom: 0.5rem;
+  }

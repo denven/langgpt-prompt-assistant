@@ -2,7 +2,9 @@
 
 A powerful prompt assistant built on the [LangGPT framework](https://github.com/langgptai/LangGPT) for generating structured, high-quality prompts. This tool helps you create well-organized prompts following the LangGPT methodology for better AI interactions.
 
-![Demo-UI](./spa-screenshot.png)
+![Demo-UI](./screenshots//spa-screenshot.png)
+
+![Demo-Prompt-Generated-SPA)](./screenshots//ai-news-hub.png)
 
 ## 🌟 Features
 
